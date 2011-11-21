@@ -40,7 +40,7 @@ use JSON;
 use MyGengo;
 
 # Get an instance of a mygengo client
-my $mygengo = MyGengo->new('api public key', 'api private key', 'true');
+my $mygengo = MyGengo->new('api public key', 'api private key', 'sandbox_true_or_false');
 
 # Retrieve basic account information...
 my $stats = $mygengo->getAccountStats();

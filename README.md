@@ -1,4 +1,4 @@
-myGengo Perl Library (for the [myGengo API](http://mygengo.com/))
+myGengo Perl Library (for the [myGengo API](http://mygengo.com/api/))
 ========================================================================================================
 Translating your tools and products helps people all over the world access them; this is, of course, a
 somewhat tricky problem to solve. **[myGengo](http://mygengo.com/)** is a service that offers human-translation
@@ -24,7 +24,7 @@ so at the following outlets. We love hearing from developers!
 Email: ryan [at] mygengo dot com  
 Twitter: **[@mygengo_dev](http://twitter.com/mygengo_dev)**  
 
-If you come across any issues, please file them on the **[Github project issue tracker](https://github.com/myGengo/mygengo-perl/issues)**. Thanks!
+If you come across any issues, please file them on the **[Github project issue tracker](https://github.com/myGengo/mygengo-perl-new/issues)**. Thanks!
 
 
 Documentation

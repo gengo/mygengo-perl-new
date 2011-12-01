@@ -461,9 +461,7 @@ sub postTranslationJobComment {
 	
 	# This makes the call signature a bit nicer for the end-user. :)
     return $self->_signAndSend('POST', '/translate/job/'.$id.'/comment', {
-		comment => {
 			body => $comment
-		}
 	});
 }
 

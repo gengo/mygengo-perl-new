@@ -123,7 +123,7 @@ sub _signAndSend {
 
 =head2 _signAndRequest( $method, $endpoint, \%data )
 
-Internal method used for POSTing/PUTing data. Left 'available'
+Internal method used for GETting/DELETing data. Left 'available'
 in case anybody wants to use it for tinkering.
 
 =cut

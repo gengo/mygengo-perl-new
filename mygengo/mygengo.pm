@@ -137,9 +137,9 @@ sub _signAndRequest {
     my $url = '?ts='.$time.'&api_key='.uri_escape($self->{publicKey});
     $url .= '&api_sig='.$hmac->hexdigest;
 
-    if(defined($data)) {
-        foreach my $key ($data) { 
-            if(defined($data->{$key})) {
+    if ( ref($data) eq 'HASH' ) {
+        foreach my $key ( keys %$data ) { 
+            if ( defined($data->{$key}) ) {
                 $url .= '&'."$key=".uri_escape($data->{$key}); 
             }
         }

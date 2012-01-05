@@ -392,7 +392,7 @@ Updates the given job with a few different possible statuses.
 =back
 
 =cut
-sub updateTanslationJob { 
+sub updateTranslationJob { 
     my ($self, $id, $statusObj) = @_;
     return $self->_signAndSend('PUT', '/translate/job/'.$id, $statusObj);
 }
@@ -445,7 +445,7 @@ below).
 =back
 
 =cut
-sub updateTanslationJobs { 
+sub updateTranslationJobs { 
     my ($self, $jobsStatusObj) = @_;
     return $self->_signAndSend('PUT', '/translate/jobs/', $jobsStatusObj);
 }

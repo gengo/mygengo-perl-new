@@ -102,7 +102,7 @@ sub _signAndSend {
     my $hmac = Digest::HMAC->new($self->{privateKey}, "Digest::SHA1");
     $hmac->add($time);
 
-    my $datstr = 'api_sig='.$hmac->hexdigest.'&api_key='.$self->{publicKey}.'&data='.uri_escape(to_json($params)).'&ts='.$time;
+    my $datstr = 'api_sig='.$hmac->hexdigest.'&api_key='.$self->{publicKey}.'&data='.uri_escape(to_json($params, {utf8 => 1})).'&ts='.$time;
     
     my $headers = HTTP::Headers->new(
         'Accept' => 'application/json; charset=utf-8',

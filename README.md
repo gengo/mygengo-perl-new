@@ -1,7 +1,7 @@
-myGengo Perl Library (for the [myGengo API](http://mygengo.com/api/))
+myGengo Perl Library (for the [Gengo API](developers.gengo.com))
 ========================================================================================================
 Translating your tools and products helps people all over the world access them; this is, of course, a
-somewhat tricky problem to solve. **[myGengo](http://mygengo.com/)** is a service that offers human-translation
+somewhat tricky problem to solve. **[Gengo](gengo.com/)** is a service that offers human-translation
 (which is often a higher quality than machine translation), and an API to manage sending in work and watching
 jobs. This is a Perl interface to make using the API simpler. 
 
@@ -10,7 +10,7 @@ Installation & Requirements
 This module is not on CPAN yet; to use it, simply include it in your project, then...
 
 ``` perl
-use MyGengo;
+use mygengo::mygengo;
 ```
 
 To use this module, you'll also need to make sure you have the `JSON` and `LWP` packages installed from CPAN.
@@ -29,36 +29,7 @@ If you come across any issues, please file them on the **[Github project issue t
 
 Documentation
 -----------------------------------------------------------------------------------------------------
-**Full documentation of each function is below**, but anyone should be able to cobble together 
-a working script with the following:
-
-``` perl
-#!/usr/bin/perl
-use strict;
-use warnings;
-use JSON;
-use MyGengo;
-
-# Get an instance of a mygengo client
-my $mygengo = MyGengo->new('api public key', 'api private key', 'sandbox_true_or_false');
-
-# Retrieve basic account information...
-my $stats = $mygengo->getAccountStats();
-my $balance = $mygengo->getAccountBalance();
-
-# Post a job to myGengo
-my $job = $mygengo->postTranslationJob({
-    type => 'text',
-    slug => 'Test',
-    body_src => 'HEY ITSA ME A PERL LIBRARIO',
-    lc_src => 'en',
-    lc_tgt => 'ja',
-    tier => 'standard'
-});
-
-# Check the response, etc.
-print $job->{'response'};
-```
+**Full documentation of each function is below**, see **[gengo.pl](https://github.com/ekessel/mygengo-perl-new/blob/master/gengo.pl)** for a tested example script.
 
 This should be enough to get anyone started; the library is very well documented, and each
 function should have accompanying comments and Perldocs if you take a quick read through!

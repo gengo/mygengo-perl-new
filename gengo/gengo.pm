@@ -1,15 +1,15 @@
-package MyGengo;
+package Gengo;
 
 use strict;
 use warnings;
 
 =head1 NAME
 
-MyGengo.pm - Library for interacting with the myGengo API
+Gengo.pm - Library for interacting with the myGengo API
 
 =head1 DESCRIPTION
 
-A Perl interface for the mygengo API. Not much to this,
+A Perl interface for the gengo API. Not much to this,
 should be pretty self explanatory. ;)
 
 For reference as to what this library actually does in regards
@@ -22,8 +22,8 @@ section below.
 
 =head1 SYNOPSIS
 
-    use MyGengo;
-    my $mygengo = MyGengo->new('pubKey', 'privKey', '1');
+    use Gengo;
+    my $gengo = Gengo->new('pubKey', 'privKey', '1');
 
     # Stuff
 
@@ -42,6 +42,8 @@ use URI::Escape;
 use Digest::HMAC;
 use Digest::SHA1;
 
+use Data::Dumper;
+
 =head1 METHODS
 
 =head2 new( $public_api_key, $private_api_key, [$use_sandbox], [$user_agent] )
@@ -52,8 +54,8 @@ and then use the appropriate calls below.
 Public/private API keys can be found in your account details on the myGengo
 site.
 
-If $use_sandbox is true, the sandbox will be used instead of the production
-site.
+If $use_sandbox is 'true', the sandbox will be used instead of the production
+site. Otherwise, if 'false', it will use the live site.
 
 If $user_agent is defined, the value will be used as the User-Agent header
 for the API requests.
@@ -81,7 +83,8 @@ sub new {
         publicKey => $publicKey,
         privateKey => $privateKey,
         useSandbox => $useSandbox,
-        apiURL => ($useSandbox ? 'http://api.sandbox.mygengo.com/v1.1' : 'http://api.mygengo.com/v1.1'),
+        # apiURL => ($useSandbox ? 'http://api.sandbox.gengo.com/v1.1' : 'http://api.gengo.com/v1.1'),
+        apiURL => ($useSandbox eq 'true' ? 'http://api.sandbox.gengo.com/v2/' : 'http://api.gengo.com/v2'),
         client => $client,
         json => $json
     };
@@ -104,6 +107,8 @@ sub _signAndSend {
 
     my $datstr = 'api_sig='.$hmac->hexdigest.'&api_key='.$self->{publicKey}.'&data='.uri_escape(to_json($params, {utf8 => 1})).'&ts='.$time;
     
+    print Dumper($datstr);
+
     my $headers = HTTP::Headers->new(
         'Accept' => 'application/json; charset=utf-8',
         'Content-Type' => 'application/x-www-form-urlencoded'
@@ -307,7 +312,7 @@ POSTs a job to myGengo for translators to pick up and work on.
 
 $job is a hash/object that follows our payload structure. See:
 
-L<http://mygengo.com/api/developer-docs/payloads/> (submissions)
+L<http://gengo.com/api/developer-docs/payloads/> (submissions)
 
 =cut
 sub postTranslationJob {
@@ -319,7 +324,7 @@ sub postTranslationJob {
 
 Post multiple jobs at once over to myGengo; accepts two extra optional parameters.
 See this page for more information about this endpoint: 
-L<http://mygengo.com/api/developer-docs/methods/translate-jobs-post/>
+L<http://gengo.com/api/developer-docs/methods/translate-jobs-post/>
 
 \@jobs is an array of job hashes/objects to send over.
 
@@ -368,7 +373,7 @@ Updates the given job with a few different possible statuses.
 
     for_translator: Optional. Comments that you can pass on to the translator.
 
-    for_mygengo: Optional. Comments to send to the myGengo staff (kept private on myGengo's end)
+    for_gengo: Optional. Comments to send to the myGengo staff (kept private on myGengo's end)
 
     public: Optional. 1 (true) / 0 (false, default). Whether myGengo can share this feedback publicly.
 
@@ -419,7 +424,7 @@ below).
 
     for_translator: Optional. Comments that you can pass on to the translator.
 
-    for_mygengo: Optional. Comments to send to the myGengo staff (kept private
+    for_gengo: Optional. Comments to send to the myGengo staff (kept private
         on myGengo's end)
 
     public: Optional. 1 (true) / 0 (false, default). Whether myGengo can share
@@ -457,12 +462,12 @@ extra bits of information as it comes up.
 
 =cut
 sub postTranslationJobComment { 
-	my ($self, $id, $comment) = @_;
-	
-	# This makes the call signature a bit nicer for the end-user. :)
+    my ($self, $id, $comment) = @_;
+    
+    # This makes the call signature a bit nicer for the end-user. :)
     return $self->_signAndSend('POST', '/translate/job/'.$id.'/comment', {
-			body => $comment
-	});
+            body => $comment
+    });
 }
 
 # And now we return this, because... well, that's just how
@@ -471,16 +476,16 @@ sub postTranslationJobComment {
 
 =head1 AUTHOR
 
-@author: Ryan McGrath <ryan@mygengo.com>
+@author: Ryan McGrath <ryan@gengo.com>
 
 =head1 SEE ALSO
 
-@docs: L<http://mygengo.com/api/developer-docs/>
+@docs: L<http://gengo.com/api/developer-docs/>
 
 =head1 LICENSE
 
-@copyright: Copyright (c) 2011 myGengo, Inc. (L<http://mygengo.com>)
+@copyright: Copyright (c) 2011 myGengo, Inc. (L<http://gengo.com>)
 
-@license: L<http://mygengo.com/services/api/dev-docs/mygengo-code-license/> New BSD License
+@license: L<http://gengo.com/services/api/dev-docs/gengo-code-license/> New BSD License
 
 =cut

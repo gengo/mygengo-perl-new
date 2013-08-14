@@ -21,7 +21,7 @@ Question, Comments, Complaints?
 If you have questions or comments and would like to reach us directly, please feel free to do
 so at the following outlets. We love hearing from developers!
 
-Email: ryan [at] mygengo dot com  
-Twitter: **[@mygengo_dev](http://twitter.com/mygengo_dev)**  
+Email: issam.zeibak [at] dot com  
+Twitter: **[@gengoit](http://twitter.com/mygengo_dev)**  
 
 If you come across any issues, please file them on the **[Github project issue tracker](https://github.com/myGengo/mygengo-perl-new/issues)**. Thanks!

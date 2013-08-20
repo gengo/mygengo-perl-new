@@ -106,8 +106,6 @@ sub _signAndSend {
     $hmac->add($time);
 
     my $datstr = 'api_sig='.$hmac->hexdigest.'&api_key='.$self->{publicKey}.'&data='.uri_escape(to_json($params, {utf8 => 1})).'&ts='.$time;
-    
-    print Dumper($datstr);
 
     my $headers = HTTP::Headers->new(
         'Accept' => 'application/json; charset=utf-8',

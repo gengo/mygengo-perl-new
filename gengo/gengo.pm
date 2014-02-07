@@ -304,20 +304,6 @@ sub getServiceLanguages {
     return $self->_signAndRequest('GET', '/translate/service/languages');
 }
 
-=head2 postTranslationJob( $job )
-
-POSTs a job to myGengo for translators to pick up and work on.
-
-$job is a hash/object that follows our payload structure. See:
-
-L<http://gengo.com/api/developer-docs/payloads/> (submissions)
-
-=cut
-sub postTranslationJob {
-    my ($self, $job) = @_;
-    return $self->_signAndSend('POST', '/translate/job/', {job => $job});
-}
-
 =head2 postTranslationJobs( \@jobs, [$process], [$as_group] )
 
 Post multiple jobs at once over to myGengo; accepts two extra optional parameters.

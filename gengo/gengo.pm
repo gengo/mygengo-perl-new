@@ -191,6 +191,16 @@ sub getTranslationJob {
     return $self->_signAndRequest('GET', '/translate/job/'.$id);
 }
 
+=head2 getTranslationOrder( $order_id )
+
+Retrieves the order from Gengo with the specified order id.
+
+=cut
+sub getTranslationOrder { 
+    my ($self, $order_id) = @_; 
+    return $self->_signAndRequest('GET', '/translate/order/'.$order_id);
+}
+
 =head2 getTranslationJobs( [$status], [$timestamp_after], [$count] )
 
 Acts like a filter for jobs you've previously submitted.
